@@ -5,7 +5,7 @@ C_Base::C_Base():
 mainWindow
 {
 
-    SDL_CreateWindow("GLT developer Version by M1SMR", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN )
+    SDL_CreateWindow("SDL_GLT by M1SMR/MIROGON", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN )
 
 },
 
@@ -19,7 +19,7 @@ mainRenderer
 mainFont
 {
 
-    TTF_OpenFont( "/home/m1smr/Documents/C++/CodeLite/SDL_GLT/data/opensans.ttf"  , 28)
+    TTF_OpenFont( _FontPath, 28)
 
 },
 
@@ -29,10 +29,12 @@ mainTimer
     new C_Timer}
 
 {
+    
+    //Set the basic render color
 
-SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(mainRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 
-//std::cout<<"Window und Renderer wurden erstellt, Singleton wurde Erstellt"<<std::endl;
+    //std::cout<<"Window und Renderer wurden erstellt, Singleton wurde Erstellt"<<std::endl;
 
 };
 

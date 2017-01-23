@@ -1,24 +1,29 @@
 #include "Block.h"
 
 C_Block::C_Block(BlockType b){
-
-    xCoordinates = 0;
-    yCoordinates = 0;
-
+    
+    blockRectDouble = new double_Rect;
+    
+    blockRectDouble->x = 0;
+    blockRectDouble->y = 0;
+    
+    blockRectDouble->w = 50;
+    blockRectDouble->h = 50;
+    
     blockType = b;
 
-    blockTexture = new C_Texture;
+    if(dirtblockTexture == nullptr){
+        
+        dirtblockTexture = new C_Texture;
+        dirtblockTexture->InitTexture(_DirtBlockPath);
+        if(dirtblockTexture==nullptr){
 
-    if(blockType==Dirt){
-
-        blockTexture->InitTexture(_DirtBlockPath);
-        if(blockTexture==nullptr){
-
-            std::cout<<"BlockTexure could not be intialized!"<<std::endl;
+            std::cout<<"dirtblockTexure could not be intialized!"<<std::endl;
 
         }
-
     }
+
+
 
 
 
@@ -26,60 +31,63 @@ C_Block::C_Block(BlockType b){
 
 C_Block::C_Block(){
 
-    xCoordinates = 0;
-    yCoordinates = 0;
-
+    blockRectDouble = new double_Rect;
+    
+    blockRectDouble->x = 0;
+    blockRectDouble->y = 0;
+    
+    blockRectDouble->w = 50;
+    blockRectDouble->h = 50;
+    
     blockType = Dirt;
 
-    blockTexture = new C_Texture;
+    if(dirtblockTexture == nullptr){
+        
+        dirtblockTexture = new C_Texture;
+        dirtblockTexture->InitTexture(_DirtBlockPath);
+        if(dirtblockTexture==nullptr){
+
+            std::cout<<"dirtblockTexure could not be intialized!"<<std::endl;
+
+        }
+    }
 
 }
 
 C_Block::~C_Block(){
 
-    delete blockTexture;
+    delete blockRectDouble;
 
 }
 
 bool C_Block::InitBlock(long x, long y){
 
-    xCoordinates = x;
-    yCoordinates = y;
-
+    blockRectDouble->x = x;
+    blockRectDouble->y = y;
 
 }
 
 bool C_Block::InitBlock(long x, long y, BlockType b ){
 
-    xCoordinates = x;
-    yCoordinates = y;
+    blockRectDouble->x = x;
+    blockRectDouble->y = y;
 
     blockType = b;
 
-    if(blockType==Dirt){
-
-        blockTexture->InitTexture(_DirtBlockPath);
-        
-        if(blockTexture==nullptr){
-
-            std::cout<<"BlockTexure could not be intialized!"<<std::endl;
-
-        }
-
-    }
-
 }
 
-bool C_Block::DespawnBlock(){
-
-    this->~C_Block();
-
-
+void C_Block::ChangeBlockType(BlockType newBlockType){
+    
+    blockType = newBlockType;
+    
 }
 
-
-bool C_Block::RenderBlock(){
-
-    blockTexture->RenderTexture(xCoordinates, yCoordinates);
-
+void C_Block::DeleteStaticBlocks(){
+    
+    delete dirtblockTexture;
+    
 }
+
+C_Texture* C_Block::dirtblockTexture = nullptr;
+
+

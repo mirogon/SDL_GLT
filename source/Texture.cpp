@@ -17,7 +17,6 @@ C_Texture::C_Texture(){
 C_Texture::~C_Texture(){
 
     SDL_DestroyTexture(this->texture);
-    texture = nullptr;
     delete textureRect;
     textureRect = nullptr;
 

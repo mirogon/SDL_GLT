@@ -21,7 +21,7 @@ bool C_Map::CreateMap(){
             blockMap.push_back(new C_Block(Dirt));
             std::vector<C_Block*>::iterator mapIt = blockMap.begin();
             mapIt+= num;
-            (*mapIt)->InitBlock(i*32, o*32 + BlockOffsetY);
+            (*mapIt)->InitBlock(i*BlockSize, o*BlockSize + BlockOffsetY);
             std::cout<<"Block Nr. "<<num<<" xC: "<<(*mapIt)->GetX()<<" yC: "<<(*mapIt)->GetY()<<std::endl;
 
             num++;
@@ -62,15 +62,7 @@ bool C_Map::CreateMap(){
 
 }
 
-bool C_Map::RenderMap(){
-    
-    for(std::vector<C_Block*>::iterator i = blockMap.begin(); i != blockMap.end(); ++i){
-        
-        (*i)->RenderBlock();
-        
-    }
 
-}
 
 bool C_Map::SaveMap(){
 
@@ -133,10 +125,6 @@ bool C_Map::LoadMap(){
     long savedBlockCoordinateY = 0;
 
     int savedBlockType;
-
-    //blockMap.clear();
-    
-    //blockMap.push_back(new C_Block());
 
     //WHILE fstream loadMap gets the character from the file
     while(loadMap.get(c)){
@@ -281,8 +269,20 @@ bool C_Map::LoadMap(){
         
         if(savedBlockType == 0){
 
-            castedBT = Dirt;
+            castedBT = Void;
 
+        }
+        
+        else if(savedBlockType == 1){
+            
+            castedBT = Dirt;
+            
+        }
+        
+        else if(savedBlockType == 2){
+            
+            castedBT = Stone;
+            
         }
         
         else{

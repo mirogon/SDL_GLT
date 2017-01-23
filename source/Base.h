@@ -12,7 +12,7 @@ const int SCREEN_HEIGHT = 720;
 #define _GetFont ( ( C_Base::GetSingleton() )->GetFont() )
 #define _GetTimer ( ( C_Base::GetSingleton() )->GetTimer() )
 
-
+#define _FontPath "/home/m1smr/Documents/C++/CodeLite/SDL_GLT/data/opensans.ttf"
 
 class C_Base : public C_Singleton<C_Base> {
 
@@ -23,7 +23,6 @@ public:
 //Methods
 
 ~C_Base();
-
 
 //INLINE
 
