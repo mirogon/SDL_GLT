@@ -10,12 +10,10 @@ C_Game();
 
 ~C_Game();
 
-
-
 //INLINE METHODS
-void Game_Play();
-void MoveMap();
-void CheckMining();
+void Game_Play(bool mouseDown);
+void MoveMap() const;
+void CheckMining() const;
 
 private:
 
@@ -24,7 +22,7 @@ C_Character* gameCharacter;
 
 };
 
-inline void C_Game::Game_Play(){
+inline void C_Game::Game_Play(bool mouseDown){
 
     static bool firstloop = true;
 
@@ -32,23 +30,17 @@ inline void C_Game::Game_Play(){
 
         gameMap->CreateMap();
         //gameMap->LoadMap();
-        
+        gameMap->MoveMap( ( MapSizeX / 2 ) * -BlockSize, 0);
         firstloop=false;
 
     }
-    
-    static SDL_Event e;
-    
-    while(SDL_PollEvent(&e)){
+            
+    if(mouseDown){
         
-        if(e.type == SDL_MOUSEBUTTONDOWN){
-            
-            CheckMining();
-            
-        }
+        CheckMining();
         
     }
-    
+
     MoveMap();
     
     gameMap->RenderMap();
@@ -58,7 +50,7 @@ inline void C_Game::Game_Play(){
 
 }
 
-inline void C_Game::MoveMap(){
+inline void C_Game::MoveMap() const{
     
     static const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
     
@@ -82,12 +74,12 @@ inline void C_Game::MoveMap(){
     
 }
 
-inline void C_Game::CheckMining(){
+inline void C_Game::CheckMining() const{
     
     int mouseX = 0, mouseY = 0;
     
     SDL_GetMouseState(&mouseX, &mouseY);
     
-    gameMap->ChangeBlockType(mouseX, mouseY);
+    gameMap->BlockToVoid(mouseX, mouseY);
     
 }

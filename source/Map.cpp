@@ -11,7 +11,7 @@ C_Map::~C_Map(){
 
 }
 
-bool C_Map::CreateMap(){
+void C_Map::CreateMap(){
 
     for(int i=0; i<MapSizeX;i++){
 
@@ -64,7 +64,7 @@ bool C_Map::CreateMap(){
 
 
 
-bool C_Map::SaveMap(){
+void C_Map::SaveMap(){
 
     std::fstream saveMap( _MapPath , std::ios::out | std::ios::trunc);
 
@@ -97,7 +97,7 @@ bool C_Map::SaveMap(){
 
 }
 
-bool C_Map::LoadMap(){
+void C_Map::LoadMap(){
 
     std::fstream loadMap (_MapPath, std::ios::in);
 

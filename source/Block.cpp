@@ -57,17 +57,18 @@ C_Block::C_Block(){
 C_Block::~C_Block(){
 
     delete blockRectDouble;
-
+    blockRectDouble = nullptr;
+    
 }
 
-bool C_Block::InitBlock(long x, long y){
+void C_Block::InitBlock(long x, long y){
 
     blockRectDouble->x = x;
     blockRectDouble->y = y;
 
 }
 
-bool C_Block::InitBlock(long x, long y, BlockType b ){
+void C_Block::InitBlock(long x, long y, BlockType b ){
 
     blockRectDouble->x = x;
     blockRectDouble->y = y;
@@ -85,6 +86,7 @@ void C_Block::ChangeBlockType(BlockType newBlockType){
 void C_Block::DeleteStaticBlocks(){
     
     delete dirtblockTexture;
+    dirtblockTexture = nullptr;
     
 }
 

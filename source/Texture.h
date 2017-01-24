@@ -12,15 +12,16 @@ virtual ~C_Texture();
 
 bool InitTexture (std::string path);
 bool InitTextureFromText(std::string text, SDL_Color = {0,0,0});
-void FreeTexture ();
+void FreeTexture();
 
 
 //INLINE
-SDL_Texture* GetTexture();
+
 void RenderTexture (int x, int y);
 void RenderTexture (int x, int y, SDL_Rect* clip);
 void RenderTextureRotated(int x, int y, SDL_Rect* clip, double degree = 0);
-const SDL_Rect* GetRect();
+const SDL_Rect* GetRect() const;
+SDL_Texture* GetTexture() const;
 
 protected:
 
@@ -29,11 +30,7 @@ SDL_Texture* texture;
 
 };
 
-inline SDL_Texture* C_Texture::GetTexture(){
 
-    return texture;
-
-}
 
 inline void C_Texture::RenderTexture(int x, int y){
 
@@ -69,8 +66,14 @@ inline void C_Texture::RenderTextureRotated(int x, int y, SDL_Rect* clip, double
 
 }
 
-inline const SDL_Rect* C_Texture::GetRect(){
+inline const SDL_Rect* C_Texture::GetRect() const{
         
     return textureRect;
+
+}
+
+inline SDL_Texture* C_Texture::GetTexture() const{
+
+    return texture;
 
 }

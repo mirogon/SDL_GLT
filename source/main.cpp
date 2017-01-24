@@ -20,14 +20,18 @@ int main(int argc, char** argv){
         std::cout<<"Backgroundtexture could not be intialized"<<std::endl;
 
     }
-
+    
+    bool mouseDown = false;
     bool quitPollEvent = false;
-    SDL_Event pollEvent;
-
+    
+    //Create the Base
     C_Base::GetSingleton();
-
+    
+    //Create the main game object
     C_Game mainGame;
-
+    
+    SDL_Event pollEvent;
+    
     //Repeat as long as quitPollEvent = false
     while(quitPollEvent == false){
 
@@ -48,26 +52,40 @@ int main(int argc, char** argv){
                         
                 }
             }
+            
+            if(pollEvent.type == SDL_MOUSEBUTTONDOWN){
+                
+                mouseDown = true;
+                
+            }
+            
+            else if(pollEvent.type != SDL_MOUSEBUTTONDOWN){
+                
+                mouseDown = false;
+                
+            }
+            
         }
             
         //Clear the renderer with the basic render color
         SDL_RenderClear(_GetRenderer);
-
+        
+        //Render the background texture
         backgroundTexture->RenderTexture(0,0);
 
-        mainGame.Game_Play();
+        mainGame.Game_Play(mouseDown);
 
         //Sync the renderer with the window
         SDL_RenderPresent(_GetRenderer);
                     
-        //Count fps
+        //Count and cout fps every second
         static int countedFrames = 0;
         static Uint32 lastTimeCounted = SDL_GetTicks();
                     
         if(SDL_GetTicks() - lastTimeCounted >= 1000){
                         
             std::cout<<"FPS: "<<countedFrames<<std::endl;
-                        countedFrames = 0;
+            countedFrames = 0;
             lastTimeCounted = SDL_GetTicks();
                         
         }

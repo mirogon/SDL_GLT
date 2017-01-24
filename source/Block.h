@@ -18,25 +18,27 @@ class C_Block{
 
 public:
 
-C_Block(BlockType b);
 C_Block();
+
+C_Block(BlockType b);
+
 ~C_Block();
 
-bool InitBlock(long x, long y);
-bool InitBlock(long x, long y, BlockType b);
+void InitBlock(long x, long y);
+void InitBlock(long x, long y, BlockType b);
 
 void ChangeBlockType(BlockType newBlockType);
 
 static void DeleteStaticBlocks();
 
 //INLINE METHODS
-bool RenderBlock();
-bool MoveBlock(double mX, double mY);
+bool RenderBlock() const;
+void MoveBlock(double& mX, double& mY);
 
-long GetX();
-long GetY();
+long GetX() const;
+long GetY() const;
 
-BlockType GetBlockType();
+BlockType GetBlockType() const;
 
 private:
 
@@ -48,39 +50,44 @@ double_Rect* blockRectDouble;
 
 };
 
-inline long C_Block::GetX(){
-
-    return blockRectDouble->x;
-
-}
-
-inline long C_Block::GetY(){
-
-    return blockRectDouble->y;
-
-}
-
-inline BlockType C_Block::GetBlockType(){
-
-    return blockType;
-
-}
-
-inline bool C_Block::MoveBlock(double mX, double mY){
-    
-    blockRectDouble->x += mX;
-    blockRectDouble->y += mY;
-    
-}
-
-inline bool C_Block::RenderBlock(){
+inline bool C_Block::RenderBlock() const{
     
     switch(blockType){
         
         case Void: break;
         case Dirt:  dirtblockTexture->RenderTexture(blockRectDouble->x, blockRectDouble->y); break;
         case Stone: break;
+        default: return 1; break;
     }
    
+   return 0;
 
 }
+
+inline void C_Block::MoveBlock(double& mX, double& mY){
+    
+    blockRectDouble->x += mX;
+    blockRectDouble->y += mY;
+    
+}
+
+
+inline long C_Block::GetX() const{
+
+    return blockRectDouble->x;
+
+}
+
+inline long C_Block::GetY() const{
+
+    return blockRectDouble->y;
+
+}
+
+inline BlockType C_Block::GetBlockType() const{
+
+    return blockType;
+
+}
+
+

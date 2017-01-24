@@ -26,13 +26,13 @@ public:
 
 //INLINE
 
-SDL_Window* GetWindow();
+SDL_Window* GetWindow() const;
 
-SDL_Renderer* GetRenderer();
+SDL_Renderer* GetRenderer() const;
 
-TTF_Font* GetFont();
+TTF_Font* GetFont() const;
 
-C_Timer* GetTimer();
+C_Timer* GetTimer() const;
 
 
 private:
@@ -50,27 +50,28 @@ C_Base();
 
 };
 
-inline TTF_Font* C_Base::GetFont(){
+inline SDL_Window* C_Base::GetWindow() const{
+        
+    return mainWindow;
+
+};
+
+inline SDL_Renderer* C_Base::GetRenderer() const{
+        
+    return mainRenderer;
+
+};
+
+inline TTF_Font* C_Base::GetFont() const{
         
     return mainFont;
 
 };
 
-inline C_Timer* C_Base::GetTimer(){
+inline C_Timer* C_Base::GetTimer() const{
         
     return mainTimer;
 
 };
 
 
-inline SDL_Window* C_Base::GetWindow(){
-        
-    return mainWindow;
-
-};
-
-inline SDL_Renderer* C_Base::GetRenderer(){
-        
-    return mainRenderer;
-
-};

@@ -22,16 +22,7 @@ C_Texture::~C_Texture(){
 
 }
 
-void C_Texture::FreeTexture(){
 
-    if (texture != nullptr){
-
-        SDL_DestroyTexture(texture);
-        texture = nullptr;
-
-    }
-    
-}
 
 bool C_Texture::InitTexture(std::string path){
 
@@ -78,5 +69,16 @@ bool C_Texture::InitTextureFromText(std::string text, SDL_Color color){
     SDL_FreeSurface(loadText);
 
     return texture != nullptr;
+    
+}
+
+void C_Texture::FreeTexture(){
+
+    if (texture != nullptr){
+
+        SDL_DestroyTexture(texture);
+        texture = nullptr;
+
+    }
     
 }
