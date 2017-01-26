@@ -21,7 +21,8 @@ int main(int argc, char** argv){
 
     }
     
-    bool mouseDown = false;
+    bool leftMouseDown = false;
+    bool rightMouseDown = false;
     bool quitPollEvent = false;
     
     //Create the Base
@@ -55,13 +56,25 @@ int main(int argc, char** argv){
             
             if(pollEvent.type == SDL_MOUSEBUTTONDOWN){
                 
-                mouseDown = true;
+                if(pollEvent.button.button == SDL_BUTTON_LEFT){
+                    
+                    leftMouseDown = true;
+                    
+                }
+                
+                if(pollEvent.button.button == SDL_BUTTON_RIGHT){
+                    
+                    rightMouseDown = true;
+                    
+                }
+                
                 
             }
             
             else if(pollEvent.type != SDL_MOUSEBUTTONDOWN){
                 
-                mouseDown = false;
+                leftMouseDown = false;
+                rightMouseDown = false;
                 
             }
             
@@ -73,7 +86,7 @@ int main(int argc, char** argv){
         //Render the background texture
         backgroundTexture->RenderTexture(0,0);
 
-        mainGame.Game_Play(mouseDown);
+        mainGame.Game_Play(leftMouseDown, rightMouseDown);
 
         //Sync the renderer with the window
         SDL_RenderPresent(_GetRenderer);
@@ -92,7 +105,8 @@ int main(int argc, char** argv){
 
         ++countedFrames;
     }
-
+    
+    mainGame.Game_Save();
     //Clear the memory and quit SDL
     delete backgroundTexture;
     C_Block::DeleteStaticBlocks();

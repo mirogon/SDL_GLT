@@ -7,8 +7,8 @@ C_Block::C_Block(BlockType b){
     blockRectDouble->x = 0;
     blockRectDouble->y = 0;
     
-    blockRectDouble->w = 50;
-    blockRectDouble->h = 50;
+    blockRectDouble->w = BlockSize;
+    blockRectDouble->h = BlockSize;
     
     blockType = b;
 
@@ -36,8 +36,8 @@ C_Block::C_Block(){
     blockRectDouble->x = 0;
     blockRectDouble->y = 0;
     
-    blockRectDouble->w = 50;
-    blockRectDouble->h = 50;
+    blockRectDouble->w = BlockSize;
+    blockRectDouble->h = BlockSize;
     
     blockType = Dirt;
 

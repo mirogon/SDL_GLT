@@ -1,14 +1,10 @@
 #pragma once
 #include "Block.h"
 
-const int MapSizeX = 100;
-const int MapSizeY = 50;
-
-const int BlockSize = 50;
+const int MapSizeX = 1000;
+const int MapSizeY = 100;
 
 const int BlockOffsetY = 600;
-
-
 
 #define _MapPath "/home/m1smr/Documents/C++/CodeLite/SDL_GLT/data/map.m1map"
 
@@ -25,7 +21,7 @@ void LoadMap();
 
 //INLINE METHODS
 void RenderMap();
-void MoveMap(double xM, double yM);
+void MoveMap(const double& xM, const double& yM);
 void BlockToVoid(const int& x, const int& y);
 
 private:
@@ -44,7 +40,7 @@ inline void C_Map::RenderMap(){
 
 }
 
-inline void C_Map::MoveMap(double xM, double yM){
+inline void C_Map::MoveMap(const double& xM, const double& yM){
 
          
     for(std::vector<C_Block*>::iterator i = blockMap.begin(); i !=  blockMap.end(); ++i){

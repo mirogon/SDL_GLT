@@ -1,9 +1,11 @@
 #pragma once
 #include "Texture.h"
 
-#define _DirtBlockPath "/home/m1smr/Documents/C++/CodeLite/SDL_GLT/data/Dirt.bmp"
+#define _DirtBlockPath "/home/m1smr/Documents/C++/CodeLite/SDL_GLT/data/Gras.bmp"
 
 enum BlockType{Void = 0, Dirt = 1, Stone = 2};
+
+const int BlockSize = 64;
 
 struct double_Rect{
 
@@ -33,7 +35,7 @@ static void DeleteStaticBlocks();
 
 //INLINE METHODS
 bool RenderBlock() const;
-void MoveBlock(double& mX, double& mY);
+void MoveBlock(const double& mX, const double& mY);
 
 long GetX() const;
 long GetY() const;
@@ -64,7 +66,7 @@ inline bool C_Block::RenderBlock() const{
 
 }
 
-inline void C_Block::MoveBlock(double& mX, double& mY){
+inline void C_Block::MoveBlock(const double& mX, const double& mY){
     
     blockRectDouble->x += mX;
     blockRectDouble->y += mY;

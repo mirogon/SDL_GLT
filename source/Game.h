@@ -10,10 +10,14 @@ C_Game();
 
 ~C_Game();
 
+void Game_Save();
+
 //INLINE METHODS
-void Game_Play(bool mouseDown);
+void Game_Play(bool leftMouseDown, bool rightMouseDown);
+
 void MoveMap() const;
 void CheckMining() const;
+void CheckPlacement() const;
 
 private:
 
@@ -22,7 +26,7 @@ C_Character* gameCharacter;
 
 };
 
-inline void C_Game::Game_Play(bool mouseDown){
+inline void C_Game::Game_Play(bool leftMouseDown, bool rightMouseDown){
 
     static bool firstloop = true;
 
@@ -31,13 +35,19 @@ inline void C_Game::Game_Play(bool mouseDown){
         gameMap->CreateMap();
         //gameMap->LoadMap();
         gameMap->MoveMap( ( MapSizeX / 2 ) * -BlockSize, 0);
-        firstloop=false;
+        firstloop = false;
 
     }
             
-    if(mouseDown){
+    if(leftMouseDown){
         
         CheckMining();
+        
+    }
+    
+    if(rightMouseDown){
+        
+        CheckPlacement();
         
     }
 
@@ -45,8 +55,11 @@ inline void C_Game::Game_Play(bool mouseDown){
     
     gameMap->RenderMap();
     
-    gameCharacter->RenderTexture(SCREEN_WIDTH / 2 - gameCharacter->GetRect()->w / 2,BlockOffsetY - gameCharacter->GetRect()->h);
-
+    //gameCharacter->RenderTexture(SCREEN_WIDTH / 2 - gameCharacter->GetRect()->w / 2,BlockOffsetY - gameCharacter->GetRect()->h);
+   // gameCharacter->WalkAnimation();
+    gameCharacter->RenderCharacter();
+    
+    
 
 }
 
@@ -59,6 +72,7 @@ inline void C_Game::MoveMap() const{
     if(currentKeyStates[SDL_SCANCODE_D]){
          
         gameMap->MoveMap(( SDL_GetTicks() - lastTimeMoved ) * -moveSpeed ,0);
+        gameCharacter->WalkAnimation();
             
     }
         
@@ -81,5 +95,11 @@ inline void C_Game::CheckMining() const{
     SDL_GetMouseState(&mouseX, &mouseY);
     
     gameMap->BlockToVoid(mouseX, mouseY);
+    
+}
+
+inline void C_Game::CheckPlacement() const{
+    
+
     
 }
